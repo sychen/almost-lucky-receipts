@@ -46,13 +46,13 @@ def report_luckiness(receipt_serials, hit_serials):
     print('=====================================')
     print('全部', len(luckiness), '張')
     print('三碼皆中：', len(filter(lambda d: d['triple_hit'], luckiness.values())))
-    print('兩碼次數：', sum( 1 for d in luckiness.values() for h in d['hamming'] if h[1] == 2))
-    print('一碼次數：', sum( 1 for d in luckiness.values() for h in d['hamming'] if h[1] == 1))
-
-    for distance in range(1, 10):
-        number = sum( 1 for d in luckiness.values() for h in d['value'] if h[1] == distance)
-        if not number: continue
-        print('只差' + str(distance) + '碼：', number)
+    print('兩碼次數：', len([1 for d in luckiness.values() for h in d['hamming'] if h[1] == 2]))
+    print('一碼次數：', len([1 for d in luckiness.values() for h in d['hamming'] if h[1] == 1]))
+    print('相差不到10：', len([ 1 for d in luckiness.values() for h in d['value']]))
+    # for distance in range(1, 10):
+    #     number = sum( 1 for d in luckiness.values() for h in d['value'] if h[1] == distance)
+    #     if not number: continue
+    #     print('只差' + str(distance) + '碼：', number)
 
 if __name__ == "__main__":
 
