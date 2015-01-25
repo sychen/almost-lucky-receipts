@@ -11,7 +11,7 @@
 2. 然後把發票號碼未三碼也記下來 (`your_serials`)
 3. 接下來就交給程式審判啦
 
-    ./almost-lucky.py your_serials hit_serials
+        ./almost-lucky.py your_serials hit_serials
 
 ## 評估方式
 
