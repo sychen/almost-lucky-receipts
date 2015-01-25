@@ -8,7 +8,7 @@
 ## 使用方式
 
 1. 首先把中獎號碼末三碼記下來 (`hit_serials`)
-2. 然後把發票號碼未三碼也記下來 (`your_serials`)
+2. 然後把發票號碼末三碼也記下來 (`your_serials`)
 3. 接下來就交給程式審判啦
 
         ./almost-lucky.py your_serials hit_serials
