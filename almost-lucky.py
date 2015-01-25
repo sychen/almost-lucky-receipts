@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-
+from __future__ import print_function
 import sys
 
 def report_luckiness(receipt_serials, hit_serials):
@@ -28,36 +28,32 @@ def report_luckiness(receipt_serials, hit_serials):
             matches = [ d==0 for d in distance_vector]
             if any(matches):
                 data['hamming'].append((hit, matches.count(True)))
-        print receipt + ':',
+        print(receipt + ':', end='')
         if not any(data.values()):
-            print '什麼都沒有:('
+            print('什麼都沒有:(')
         else:
             if data['triple_hit']:
-                print '\033[32;1m' + hit, '三碼皆中，請檢查是否中獎！'
+                print('\033[32;1m' + hit, '三碼皆中，請檢查是否中獎！')
             if data['hamming']:
                 for key, value in data['hamming']:
-                    print '\033[33;1m{0}\033[0m(\033[31;1m{1}\033[0m碼相同)'.format(key, value),
+                    print('\033[33;1m{0}\033[0m(\033[31;1m{1}\033[0m碼相同)'.format(key, value), end='')
             if data['value']:
                 for key, value in data['value']:
-                    print '\033[33;1m{0}\033[0m(只差\033[31;1m{1}\033[0m碼)'.format(key, value),
-            print
+                    print('\033[33;1m{0}\033[0m(只差\033[31;1m{1}\033[0m碼)'.format(key, value), end='')
+            print()
         luckiness[receipt] = data
 
-    print '====================================='
-    print '全部', len(luckiness), '張'
-    print '三碼皆中:', len(filter(lambda d: d['triple_hit'], luckiness.values()))
-    print '兩碼次數：', sum( 1 for d in luckiness.values() for h in d['hamming'] if h[1] == 2)
-    print '一碼次數：', sum( 1 for d in luckiness.values() for h in d['hamming'] if h[1] == 1)
+    print('=====================================')
+    print('全部', len(luckiness), '張')
+    print('三碼皆中：', len(filter(lambda d: d['triple_hit'], luckiness.values())))
+    print('兩碼次數：', sum( 1 for d in luckiness.values() for h in d['hamming'] if h[1] == 2))
+    print('一碼次數：', sum( 1 for d in luckiness.values() for h in d['hamming'] if h[1] == 1))
 
     for distance in range(0, 10):
         if not distance: continue
         number = sum( 1 for d in luckiness.values() for h in d['value'] if h[1] == distance)
         if not number: continue
-        print '只差' + str(distance) + '碼：', number
-
-
-
-
+        print('只差' + str(distance) + '碼：', number)
 
 if __name__ == "__main__":
 
